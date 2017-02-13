@@ -1,0 +1,64 @@
+https://console.developers.google.com/apis/credentials?project=fluid-axe-158610 key
+
+podfile
+
+use_frameworks!
+platform :ios, "8.0"
+
+target 'YouTubeSearch' do
+  pod 'Alamofire', '~>4.0'
+  pod 'AlamofireImage'
+
+end
+
+
+//
+//  ViewController.swift
+//  YouTubeSearch
+//
+//  Created by student on 13/02/17.
+//  Copyright © 2017 student. All rights reserved.
+//
+
+//
+//  ViewController.swift
+//  YouTubeSearch
+//
+//  Created by student on 13/02/17.
+//  Copyright © 2017 student. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    let searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=fun&maxResults=50&key=AIzaSyAXHG5Y7vcLqJrmaKzzLEMtxJOlVVp9NV4"
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        return true
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:
+        IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        if cell == nil{
+            cell = UITableViewCell()
+        }
+        cell?.textLabel!.text = "testCell"
+        return cell!
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+}
