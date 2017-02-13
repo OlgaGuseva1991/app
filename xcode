@@ -8,6 +8,7 @@ platform :ios, "8.0"
 target 'YouTubeSearch' do
   pod 'Alamofire', '~>4.0'
   pod 'AlamofireImage'
+  pod 'AlamofireObjectMapper', '~>4.0'
 
 end
 
@@ -62,3 +63,113 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         return 1
     }
 }
+
+
+import UIKit
+import Alamofire
+
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    let searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=fun&maxResults=50&key=AIzaSyAXHG5Y7vcLqJrmaKzzLEMtxJOlVVp9NV4"
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func searchVideos() {
+    
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchVideos()
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:
+        IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        if cell == nil{
+            cell = UITableViewCell()
+        }
+        cell?.textLabel!.text = "testCell"
+        return cell!
+    }
+
+    
+}
+
+
+
+//
+//  ViewController.swift
+//  YouTubeSearch
+//
+//  Created by student on 13/02/17.
+//  Copyright © 2017 student. All rights reserved.
+//
+
+import UIKit
+import Alamofire
+
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+    var searchString = ""
+    let searchURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=fun&maxResults=50&key=AIzaSyAXHG5Y7vcLqJrmaKzzLEMtxJOlVVp9NV4"
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func searchVideos() {
+        let newURL = searchURL.replacingOccurrences(of: "fun", with: searchString)
+        Alamofire.request(newURL).responseJSON {response in
+           
+            print(response.result.value)
+            
+        }
+    
+    }
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let tempString = textField.text{
+            searchString = tempString
+            searchVideos()
+        }
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:
+        IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        if cell == nil{
+            cell = UITableViewCell()
+        }
+        cell?.textLabel!.text = "testCell"
+        return cell!
+    }
+
+    
+}
+"https://www.googleapis.com/youtube/v3/search?part=snippet&q=fun&maxResults=50&key=AIzaSyCq5G9bfwWAetKR0Q_SONjp46vFuV0DGmA"
+
+my kay "https://www.googleapis.com/youtube/v3/search?part=snippet&q=fun&maxResults=50&key=AIzaSyAXHG5Y7vcLqJrmaKzzLEMtxJOlVVp9NV4"
